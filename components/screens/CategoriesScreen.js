@@ -29,11 +29,7 @@ const CategoriesScreen = props => {
 }
 
 CategoriesScreen.navigationOptions = {
-    headerTitle: 'Film Categories',
-    headerStyle: {
-        backgroundColor: Platform.OS === 'andorid' ? Colors.primary : 'white'
-    },
-    headerTintColor: Platform.OS === 'andorid' ? "white" : Colors.primary
+    headerTitle: 'Film Categories'
 }
 
 const styles = StyleSheet.create({
