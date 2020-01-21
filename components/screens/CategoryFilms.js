@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList, Platform } from 'react-native';
 
 import { CATEGORIES, FILMS } from '../../constants/categories';
 import Colors from '../../constants/colors';
+import FilmItem from '../FilmItem';
 
 const CategoryFilms = props => {
     const catId = props.navigation.getParam('categoryId');
@@ -12,16 +13,20 @@ const CategoryFilms = props => {
 
     const renderFilmItem = itemData => {
         return (
-            <View>
-                <Text>{itemData.item.title}</Text>
-            </View>
+            <FilmItem title={itemData.item.title}
+                duration={itemData.item.duration}
+                image={itemData.item.imageUrl}
+                onSelecFilm={() => {
+
+                }} />
         )
     }
 
     return (
         <View style={styles.mainContainer}>
             <FlatList data={displayedFilms}
-            renderItem={renderFilmItem} />
+                renderItem={renderFilmItem}
+                style={{ width: '100%' }} />
         </View>
     )
 }
@@ -39,7 +44,8 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 10
     }
 })
 

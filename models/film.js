@@ -1,6 +1,6 @@
 class Film {
     constructor(id, categoryIds, title, duration, imdbScore, 
-        year, director, stars){
+        year, director, stars, imageUrl){
         this.id = id;
         this.categoryIds = categoryIds;
         this.title = title;
@@ -9,6 +9,7 @@ class Film {
         this.year = year;
         this.director = director;
         this.stars = stars
+        this.imageUrl = imageUrl;
     }
 }
 

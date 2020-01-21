@@ -15,6 +15,18 @@ export const CATEGORIES = [
 ];
 
 export const FILMS = [
-    new Film('f1', ['c3', 'c5'], "Notebook", 119, 7.6, 2004, "XXXX", ["Ryan Goslip", "XXX"]),
-    new Film('f2', ['c1'], "Sample", 180, 6.6, 2011, "XXXX", ["Ryan Goslip", "XXX"])
+    new Film('f1',
+        ['c3', 'c5'],
+        "Notebook",
+        119, 7.6, 2004,
+        "XXXX",
+        ["Ryan Goslip", "XXX"],
+        "https://images-na.ssl-images-amazon.com/images/I/71TTMWgBleL.jpg"),
+    new Film('f2',
+        ['c1'],
+        "Sample",
+        180, 6.6, 2011,
+        "XXXX",
+        ["Ryan Goslip", "XXX"],
+        "https://images-na.ssl-images-amazon.com/images/I/71TTMWgBleL.jpg")
 ];
