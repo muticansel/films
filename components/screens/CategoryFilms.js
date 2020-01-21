@@ -1,16 +1,27 @@
 import React from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Platform } from 'react-native';
 
-import { CATEGORIES } from '../../constants/categories';
+import { CATEGORIES, FILMS } from '../../constants/categories';
 import Colors from '../../constants/colors';
 
 const CategoryFilms = props => {
     const catId = props.navigation.getParam('categoryId');
     const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
 
+    const displayedFilms = FILMS.filter(film => film.categoryIds.indexOf(catId) >= 0);
+
+    const renderFilmItem = itemData => {
+        return (
+            <View>
+                <Text>{itemData.item.title}</Text>
+            </View>
+        )
+    }
+
     return (
         <View style={styles.mainContainer}>
-            <Text>{selectedCategory.title}</Text>
+            <FlatList data={displayedFilms}
+            renderItem={renderFilmItem} />
         </View>
     )
 }
