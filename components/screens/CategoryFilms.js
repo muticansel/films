@@ -7,7 +7,6 @@ import FilmItem from '../FilmItem';
 
 const CategoryFilms = props => {
     const catId = props.navigation.getParam('categoryId');
-    const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
 
     const displayedFilms = FILMS.filter(film => film.categoryIds.indexOf(catId) >= 0);
 
@@ -16,8 +15,13 @@ const CategoryFilms = props => {
             <FilmItem title={itemData.item.title}
                 duration={itemData.item.duration}
                 image={itemData.item.imageUrl}
-                onSelecFilm={() => {
-
+                onSelectFilm={() => {
+                    props.navigation.navigate({
+                        routeName: 'FilmDetail',
+                        params: {
+                            filmId: itemData.item.id
+                        }
+                    })
                 }} />
         )
     }
