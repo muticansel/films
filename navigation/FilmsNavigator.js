@@ -3,6 +3,8 @@ import { Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 
 import Colors from '../constants/colors';
 import Categories from '../components/screens/CategoriesScreen';
@@ -18,15 +20,47 @@ const FilmsStackNavigator = createStackNavigator({
     mode: 'modal',
     defaultNavigationOptions: {
         headerStyle: {
-            backgroundColor: Platform.OS === 'andorid' ? Colors.primary : 'white'
+            backgroundColor: Platform.OS === 'android' ? Colors.primary : 'white'
         },
-        headerTintColor: Platform.OS === 'andorid' ? "white" : Colors.primary
+        headerTintColor: Platform.OS === 'android' ? "white" : Colors.primary
     }
 })
 
-const FilmTabNavigator = createBottomTabNavigator({
-    Films: FilmsStackNavigator,
-    Favorites: Favorites
-})
+const tabScreenConfig = {
+    Films: {
+        screen: FilmsStackNavigator,
+        navigationOptions: {
+            tabBarIcon: tabInfo => {
+                return <FontAwesome name="film"
+                    size={25}
+                    color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.primary
+        }
+    },
+    Favorites: {
+        screen: Favorites, navigationOptions: {
+            tabBarIcon: tabInfo => {
+                return <Ionicons name="ios-star"
+                    size={25}
+                    color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.accentColor 
+        }
+    }
+}
+
+const FilmTabNavigator = Platform.OS === 'android'
+    ? createMaterialBottomTabNavigator(tabScreenConfig, {
+        activeColor: 'white',
+        shifting: true
+    })
+    : createBottomTabNavigator({
+        tabScreenConfig
+    }, {
+        tabBarOptions: {
+            activeTintColor: Colors.accentColor
+        }
+    })
 
 export default createAppContainer(FilmTabNavigator);
