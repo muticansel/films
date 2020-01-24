@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer'
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 
@@ -11,6 +12,14 @@ import Categories from '../components/screens/CategoriesScreen';
 import CategoryFilms from '../components/screens/CategoryFilms';
 import FilmDetail from '../components/screens/FilmDetail';
 import Favorites from '../components/screens/Favorites';
+//import Filters from '../components/screens/Filters';
+
+const defaultStackNavOptions = {
+    headerStyle: {
+        backgroundColor: Platform.OS === 'android' ? Colors.primary : 'white'
+    },
+    headerTintColor: Platform.OS === 'android' ? "white" : Colors.primary
+}
 
 const FilmsStackNavigator = createStackNavigator({
     Categories: Categories,
@@ -18,12 +27,15 @@ const FilmsStackNavigator = createStackNavigator({
     FilmDetail: FilmDetail
 }, {
     mode: 'modal',
-    defaultNavigationOptions: {
-        headerStyle: {
-            backgroundColor: Platform.OS === 'android' ? Colors.primary : 'white'
-        },
-        headerTintColor: Platform.OS === 'android' ? "white" : Colors.primary
-    }
+    defaultNavigationOptions: defaultStackNavOptions
+})
+
+const FavNavigator = createStackNavigator({
+    Favorites: Favorites,
+    FilmDetail: FilmDetail
+}, {
+    mode: 'modal',
+    defaultNavigationOptions: defaultStackNavOptions
 })
 
 const tabScreenConfig = {
@@ -39,13 +51,14 @@ const tabScreenConfig = {
         }
     },
     Favorites: {
-        screen: Favorites, navigationOptions: {
+        screen: FavNavigator,
+        navigationOptions: {
             tabBarIcon: tabInfo => {
                 return <Ionicons name="ios-star"
                     size={25}
                     color={tabInfo.tintColor} />
             },
-            tabBarColor: Colors.accentColor 
+            tabBarColor: Colors.accentColor
         }
     }
 }
@@ -63,4 +76,25 @@ const FilmTabNavigator = Platform.OS === 'android'
         }
     })
 
-export default createAppContainer(FilmTabNavigator);
+// const FilterStackNavigator = createStackNavigator({
+//     Filters: Filters
+// })
+
+const MainNavigator = createDrawerNavigator({
+    FilmsFav: {
+        screen: FilmTabNavigator,
+        navigationOptions: {
+            drawerLabel: "Films"
+        }
+    },
+    Filters: FilmTabNavigator // FilterStack
+}, {
+    contentOptions: {
+        activeTintColor: Colors.accentColor,
+        labelStyle: {
+            fontFamily: "open-sans-bold"
+        }
+    }
+})
+
+export default createAppContainer(MainNavigator);

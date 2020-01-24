@@ -1,20 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import FilmList from '../FilmList';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+
+import CustomHeaderButton from '../UI/HeaderButton';
 
 const Favorites = props => {
     return (
-        <View style={styles.mainContainer}>
-            <Text>Favorites Screen</Text>
-        </View>
+        <FilmList listData={[]} navigation={props.navigation} />
     )
 }
 
-const styles = StyleSheet.create({
-    mainContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+Favorites.navigationOptions = navData => {
+    return {
+        headerTitle: 'Favorites',
+        headerLeft: <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            <Item title="Menu" iconName="ios-menu" onPress={() => { 
+                navData.navigation.toggleDrawer()
+            }} />
+        </HeaderButtons>
     }
-})
+}
 
 export default Favorites;

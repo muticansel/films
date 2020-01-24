@@ -1,37 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Platform } from 'react-native';
 
 import { CATEGORIES, FILMS } from '../../constants/categories';
-import Colors from '../../constants/colors';
-import FilmItem from '../FilmItem';
+import FilmList from '../FilmList';
 
 const CategoryFilms = props => {
     const catId = props.navigation.getParam('categoryId');
 
     const displayedFilms = FILMS.filter(film => film.categoryIds.indexOf(catId) >= 0);
 
-    const renderFilmItem = itemData => {
-        return (
-            <FilmItem title={itemData.item.title}
-                duration={itemData.item.duration}
-                image={itemData.item.imageUrl}
-                onSelectFilm={() => {
-                    props.navigation.navigate({
-                        routeName: 'FilmDetail',
-                        params: {
-                            filmId: itemData.item.id
-                        }
-                    })
-                }} />
-        )
-    }
-
     return (
-        <View style={styles.mainContainer}>
-            <FlatList data={displayedFilms}
-                renderItem={renderFilmItem}
-                style={{ width: '100%' }} />
-        </View>
+        <FilmList listData={displayedFilms} navigation={props.navigation} />
     )
 }
 
@@ -43,14 +21,5 @@ CategoryFilms.navigationOptions = navData => {
         headerTitle: selectedCategory.title
     }
 }
-
-const styles = StyleSheet.create({
-    mainContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 10
-    }
-})
 
 export default CategoryFilms;

@@ -3,7 +3,9 @@ import { StyleSheet, FlatList, View, Text, TouchableOpacity, Platform } from 're
 
 import { CATEGORIES } from '../../constants/categories';
 import CategoryGrid from '../CategoryGrid';
-import Colors from '../../constants/colors';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+
+import CustomHeaderButton from '../UI/HeaderButton';
 
 
 
@@ -11,7 +13,7 @@ const CategoriesScreen = props => {
     const renderGridItem = itemData => {
         return (
             <CategoryGrid title={itemData.item.title}
-            color={itemData.item.color}
+                color={itemData.item.color}
                 onSelect={() => props.navigation.navigate('CategoryFilms', {
                     categoryId: itemData.item.id
                 })} />
@@ -25,8 +27,15 @@ const CategoriesScreen = props => {
     )
 }
 
-CategoriesScreen.navigationOptions = {
-    headerTitle: 'Film Categories'
+CategoriesScreen.navigationOptions = navData => {
+    return {
+        headerTitle: 'Film Categories',
+        headerLeft: <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            <Item title="Menu" iconName="ios-menu" onPress={() => { 
+                navData.navigation.toggleDrawer()
+            }} />
+        </HeaderButtons>
+    }
 }
 
 const styles = StyleSheet.create({
