@@ -1,24 +1,32 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { ScrollView, View, Image, Text, Button, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { FILMS } from '../../constants/categories';
 import CustomHeaderButton from '../UI/HeaderButton';
+import DefaultText from '../UI/DefaultText';
 
 const FilmDetail = props => {
     const filmId = props.navigation.getParam('filmId');
-    console.log(filmId)
     const selectedFilm = FILMS.find(film => film.id === filmId);
 
     return (
-        <View style={styles.mainContainer}>
-            <Text>{selectedFilm.title}</Text>
-            <Button title="Go to Categories"
-                onPress={() => {
-                    props.navigation.popToTop();
-                }}
-            />
-        </View>
+        <ScrollView>
+            <View style={styles.image}>
+                <Image source={{ uri: selectedFilm.imageUrl }} style={styles.image} />
+            </View>
+            <View style={styles.details}>
+                <DefaultText>{props.duration} min.</DefaultText>
+            </View>
+            <View style={styles.mainContainer}>
+                <Text>{selectedFilm.title}</Text>
+                <Button title="Go to Categories"
+                    onPress={() => {
+                        props.navigation.popToTop();
+                    }}
+                />
+            </View>
+        </ScrollView>
     )
 }
 
@@ -28,7 +36,7 @@ FilmDetail.navigationOptions = navData => {
 
     return {
         headerTitle: selectedFilm.title,
-        headerRight: (
+        headerRight: () => (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item title="Favorite" iconName="ios-star" onPress={() => { }} />
             </HeaderButtons>
@@ -41,6 +49,17 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    details: {
+        flexDirection: 'row',
+        padding: 15,
+        justifyContent: 'space-around'
+    },
+    image: {
+        width: '100%',
+        height: 200,
+        padding: 5,
+        borderRadius: 15
     }
 })
 
