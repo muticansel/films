@@ -30,11 +30,13 @@ const CategoriesScreen = props => {
 CategoriesScreen.navigationOptions = navData => {
     return {
         headerTitle: 'Film Categories',
-        headerLeft: <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-            <Item title="Menu" iconName="ios-menu" onPress={() => { 
-                navData.navigation.toggleDrawer()
-            }} />
-        </HeaderButtons>
+        headerLeft: () => (
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item title="Menu" iconName="ios-menu" onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }} />
+            </HeaderButtons>
+        )
     }
 }
 

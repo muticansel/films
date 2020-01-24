@@ -14,11 +14,14 @@ const Favorites = props => {
 Favorites.navigationOptions = navData => {
     return {
         headerTitle: 'Favorites',
-        headerLeft: <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-            <Item title="Menu" iconName="ios-menu" onPress={() => { 
-                navData.navigation.toggleDrawer()
-            }} />
-        </HeaderButtons>
+        headerLeft: () => (
+
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item title="Menu" iconName="ios-menu" onPress={() => {
+                    navData.navigation.toggleDrawer()
+                }} />
+            </HeaderButtons>
+        )
     }
 }
 
