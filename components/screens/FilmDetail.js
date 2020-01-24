@@ -1,14 +1,15 @@
 import React from 'react';
 import { ScrollView, View, Image, Text, Button, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { useSelector } from 'react-redux';
 
-import { FILMS } from '../../constants/categories';
 import CustomHeaderButton from '../UI/HeaderButton';
 import DefaultText from '../UI/DefaultText';
 
 const FilmDetail = props => {
+    const availableFilms = useSelector(state => state.filmReducer.films)
     const filmId = props.navigation.getParam('filmId');
-    const selectedFilm = FILMS.find(film => film.id === filmId);
+    const selectedFilm = availableFilms.find(film => film.id === filmId);
 
     return (
         <ScrollView>
@@ -31,11 +32,10 @@ const FilmDetail = props => {
 }
 
 FilmDetail.navigationOptions = navData => {
-    const filmId = navData.navigation.getParam('filmId');
-    const selectedFilm = FILMS.find(film => film.id === filmId);
+    const filmTitle = navData.navigation.getParam('filmTitle')
 
     return {
-        headerTitle: selectedFilm.title,
+        headerTitle: filmTitle,
         headerRight: () => (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item title="Favorite" iconName="ios-star" onPress={() => { }} />

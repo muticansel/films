@@ -1,11 +1,14 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux'
 import FilmList from '../FilmList';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import CustomHeaderButton from '../UI/HeaderButton';
 
 const Favorites = props => {
+    const favMeals = useSelector(state => state.filmReducer.favoriteMeals);
+
+
     return (
         <FilmList listData={[]} navigation={props.navigation} />
     )
