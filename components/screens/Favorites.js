@@ -6,11 +6,10 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../UI/HeaderButton';
 
 const Favorites = props => {
-    const favMeals = useSelector(state => state.filmReducer.favoriteMeals);
-
+    const favMeals = useSelector(state => state.filmReducer.favoriteFilms);
 
     return (
-        <FilmList listData={[]} navigation={props.navigation} />
+        <FilmList listData={favMeals} navigation={props.navigation} />
     )
 }
 

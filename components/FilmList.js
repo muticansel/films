@@ -1,9 +1,15 @@
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
+import { useSelector } from 'react-redux';
+
 import FilmItem from './FilmItem';
 
 const MealList = props => {
+    const favFilms = useSelector(state => state.filmReducer.favoriteFilms)
+
     const renderFilmItem = itemData => {
+        const isFav = favFilms.some(film => film.id === itemData.item.id);
+
         return (
             <FilmItem title={itemData.item.title}
                 duration={itemData.item.duration}
@@ -13,7 +19,8 @@ const MealList = props => {
                         routeName: 'FilmDetail',
                         params: {
                             filmId: itemData.item.id,
-                            filmTitle: itemData.item.title
+                            filmTitle: itemData.item.title,
+                            isFav: isFav
                         }
                     })
                 }} />
