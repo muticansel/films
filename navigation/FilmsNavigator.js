@@ -77,12 +77,10 @@ const FilmTabNavigator = Platform.OS === 'android'
             backgroundColor: Colors.primary
         }
     })
-    : createBottomTabNavigator({
-        tabScreenConfig
-    }, {
+    : createBottomTabNavigator(tabScreenConfig, {
         tabBarOptions: {
             labelStyle: {
-                fontFamily: 'open-sans-bold '
+                fontFamily: 'open-sans-bold'
             },
             activeTintColor: Colors.accentColor
         }
