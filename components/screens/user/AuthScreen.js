@@ -4,15 +4,41 @@ import {
     View,
     KeyboardAvoidingView,
     StyleSheet,
-    Button
+    Button, 
+    Alert
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as Facebook from 'expo-facebook';
 
 import Input from '../../UI/Input';
 import Card from '../../UI/Card';
 import Colors from '../../../constants/colors';
 
 const AuthScreen = props => {
+    logInFb = async () => {
+        try {
+            await Facebook.initializeAsync('1201563310234545');
+            const {
+                type,
+                token,
+                expires,
+                permissions,
+                declinedPermissions,
+            } = await Facebook.logInWithReadPermissionsAsync({
+                permissions: ['public_profile'],
+            });
+            if (type === 'success') {
+                // Get the user's name using Facebook's Graph API
+                const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+                Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+            } else {
+                // type === 'cancel'
+            }
+        } catch ({ message }) {
+            alert(`Facebook Login Error: ${message}`);
+        }
+    }
+
     return (
         <KeyboardAvoidingView
             behavior="padding"
@@ -53,6 +79,13 @@ const AuthScreen = props => {
                                 title="Switch to Sign Up"
                                 color={Colors.accent}
                                 onPress={() => { }}
+                            />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Button
+                                title="Connect with FB"
+                                color={Colors.accent}
+                                onPress={logInFb}
                             />
                         </View>
                     </ScrollView>
