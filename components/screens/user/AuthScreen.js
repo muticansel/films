@@ -13,11 +13,12 @@ import * as Facebook from 'expo-facebook';
 import Input from '../../UI/Input';
 import Card from '../../UI/Card';
 import Colors from '../../../constants/colors';
+import PrivConstants from '../../../privConstants/constants
 
 const AuthScreen = props => {
     logInFb = async () => {
         try {
-            await Facebook.initializeAsync('1201563310234545');
+            await Facebook.initializeAsync(PrivConstants.fbAppId);
             const {
                 type,
                 token,
