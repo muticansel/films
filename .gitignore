@@ -1,6 +1,7 @@
 node_modules/**/*
 .expo/*
 .expo-shared/*
+.privConstants/*
 npm-debug.*
 *.jks
 *.p8
