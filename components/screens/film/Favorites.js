@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux'
-import FilmList from '../FilmList';
+import FilmList from '../../FilmList';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import CustomHeaderButton from '../UI/HeaderButton';
-import DefaultText from '../UI/DefaultText';
+import CustomHeaderButton from '../../UI/HeaderButton';
+import DefaultText from '../../UI/DefaultText';
 
 const Favorites = props => {
     const favFilms = useSelector(state => state.filmReducer.favoriteFilms);

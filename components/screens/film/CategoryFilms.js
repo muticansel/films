@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
 
-import { CATEGORIES } from '../../constants/categories';
-import FilmList from '../FilmList';
+import { CATEGORIES } from '../../../constants/categories';
+import FilmList from '../../FilmList';
 
 const CategoryFilms = props => {
     const catId = props.navigation.getParam('categoryId');

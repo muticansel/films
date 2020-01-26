@@ -3,9 +3,9 @@ import { ScrollView, View, Image, Text, Button, StyleSheet } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
 
-import CustomHeaderButton from '../UI/HeaderButton';
-import DefaultText from '../UI/DefaultText';
-import { toggleFav } from '../../store/actions/films';
+import CustomHeaderButton from '../../UI/HeaderButton';
+import DefaultText from '../../UI/DefaultText';
+import { toggleFav } from '../../../store/actions/films';
 
 const FilmDetail = props => {
     const availableFilms = useSelector(state => state.filmReducer.films);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer'
@@ -8,10 +8,11 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 
 import Colors from '../constants/colors';
-import Categories from '../components/screens/CategoriesScreen';
-import CategoryFilms from '../components/screens/CategoryFilms';
-import FilmDetail from '../components/screens/FilmDetail';
-import Favorites from '../components/screens/Favorites';
+import Categories from '../components/screens/film/CategoriesScreen';
+import CategoryFilms from '../components/screens/film/CategoryFilms';
+import FilmDetail from '../components/screens/film/FilmDetail';
+import AuthScreen from '../components/screens/user/AuthScreen';
+import Favorites from '../components/screens/film/Favorites';
 //import Filters from '../components/screens/Filters';
 
 const defaultStackNavOptions = {
@@ -90,7 +91,7 @@ const FilmTabNavigator = Platform.OS === 'android'
 //     Filters: Filters
 // })
 
-const MainNavigator = createDrawerNavigator({
+const FilmMainNavigator = createDrawerNavigator({
     FilmsFav: {
         screen: FilmTabNavigator,
         navigationOptions: {
@@ -107,4 +108,13 @@ const MainNavigator = createDrawerNavigator({
     }
 })
 
-export default createAppContainer(MainNavigator);
+const AuthNavigator = createStackNavigator({
+    Auth: AuthScreen
+})
+
+const SwitchNavigator = createSwitchNavigator({
+    Auth: AuthNavigator,
+    Film: FilmMainNavigator
+})
+
+export default createAppContainer(SwitchNavigator);
