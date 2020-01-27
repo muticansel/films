@@ -16,6 +16,7 @@ import AuthScreen from '../components/screens/user/AuthScreen';
 import Favorites from '../components/screens/film/Favorites';
 import StartupScreen from '../components/screens/StartupScreen';
 import UserFilms from '../components/screens/user/UserFilms';
+import EditFilm from '../components/screens/user/EditFilm';
 import * as authActions from '../store/actions/auth';
 //import Filters from '../components/screens/Filters';
 
@@ -51,21 +52,22 @@ const FavNavigator = createStackNavigator({
 
 const AdminNavigator = createStackNavigator(
     {
-      UserFilms: UserFilms
+        UserFilms: UserFilms,
+        EditFilm: EditFilm
     },
     {
-      navigationOptions: {
-        drawerIcon: drawerConfig => (
-          <Ionicons
-            name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
-            size={23}
-            color={drawerConfig.tintColor}
-          />
-        )
-      },
-      defaultNavigationOptions: defaultStackNavOptions
+        navigationOptions: {
+            drawerIcon: drawerConfig => (
+                <Ionicons
+                    name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+                    size={23}
+                    color={drawerConfig.tintColor}
+                />
+            )
+        },
+        defaultNavigationOptions: defaultStackNavOptions
     }
-  );
+);
 
 const tabScreenConfig = {
     Films: {

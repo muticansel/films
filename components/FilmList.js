@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import FilmItem from './FilmItem';
+import * as filmActions from '../store/actions/films';
 
 const MealList = props => {
-    const favFilms = useSelector(state => state.filmReducer.favoriteFilms)
+    const favFilms = useSelector(state => state.filmReducer.favoriteFilms);
 
     const renderFilmItem = itemData => {
         const isFav = favFilms.some(film => film.id === itemData.item.id);
