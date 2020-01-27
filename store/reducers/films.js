@@ -1,5 +1,7 @@
 import { FILMS } from '../../constants/categories';
-import { TOGGLE_FAVORITE } from '../actions/films'
+import { TOGGLE_FAVORITE, CREATE_FILM } from '../actions/films';
+
+import Film from '../../models/film';
 
 const initialState = {
     films: FILMS,
@@ -18,6 +20,22 @@ const filmReducer = (state = initialState, action) => {
             } else {
                 const newFavFilm = state.films.find(film => film.id === action.filmId)
                 return { ...state, favoriteFilms: state.favoriteFilms.concat(newFavFilm) }
+            }
+        case CREATE_FILM:
+            const newFilm = new Film(
+                new Date().toString,
+                ["c1"],
+                action.productData.title,
+                action.productData.duration,
+                action.productData.imdbScore,
+                action.productData.year,
+                action.productData.director,
+                ["Al Pacino", "YYY"],
+                action.productData.imageUrl
+            );
+            return {
+                ...state,
+                films: state.films.concat(newFilm)
             }
         default:
             return state;
