@@ -109,6 +109,7 @@ const AuthScreen = props => {
     const logInFb = async () => {
         try {
             await Facebook.initializeAsync(PrivConstants.fbAppId);
+            setIsLoading(true);
             const {
                 type,
                 token,
@@ -116,12 +117,14 @@ const AuthScreen = props => {
                 permissions,
                 declinedPermissions,
             } = await Facebook.logInWithReadPermissionsAsync({
-                permissions: ['public_profile'],
+                permissions: ['public_profile', 'email'],
             });
             if (type === 'success') {
                 // Get the user's name using Facebook's Graph API
-                const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-                Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+                const response = await fetch(`https://graph.facebook.com/me?fields=id,name,email&access_token=${token}`);
+                const resFbData = await response.json();
+                await dispatch(authActions.loginFB(token, resFbData.id, expires));
+                props.navigation.navigate('Film')
             } else {
                 // type === 'cancel'
             }
