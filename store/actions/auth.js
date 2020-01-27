@@ -1,5 +1,7 @@
 import { AsyncStorage } from 'react-native';
+
 import PrivKeys from '../../privConstants/constants';
+import * as localErrorHandler from '../../errors/errorhandler';
 
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOGOUT = 'LOGOUT';
@@ -25,7 +27,10 @@ export const signUp = (email, password) => {
             })
 
         if (!response.ok) {
-            throw new Error("Something went wrong")
+            const errData = await response.json();
+            let message = localErrorHandler.firebaseAuthErrorHandlig(errData);
+
+            throw new Error(message)
         }
 
         const resData = await response.json()
@@ -54,12 +59,7 @@ export const logIn = (email, password) => {
 
         if (!response.ok) {
             const errData = await response.json();
-            const errorId = errData.error.message;
-            let message = errData.error.message;
-
-            if (errorId === 'EMAIL_NOT_FOUND') {
-                message = 'This email could not be found';
-            }
+            let message = localErrorHandler.firebaseAuthErrorHandlig(errData);
 
             throw new Error(message)
         }
