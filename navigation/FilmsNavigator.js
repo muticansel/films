@@ -1,11 +1,12 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, SafeAreaView, Button, View } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createDrawerNavigator } from 'react-navigation-drawer'
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-drawer'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { useDispatch } from 'react-redux';
 
 import Colors from '../constants/colors';
 import Categories from '../components/screens/film/CategoriesScreen';
@@ -13,6 +14,8 @@ import CategoryFilms from '../components/screens/film/CategoryFilms';
 import FilmDetail from '../components/screens/film/FilmDetail';
 import AuthScreen from '../components/screens/user/AuthScreen';
 import Favorites from '../components/screens/film/Favorites';
+import StartupScreen from '../components/screens/StartupScreen';
+import * as authActions from '../store/actions/auth';
 //import Filters from '../components/screens/Filters';
 
 const defaultStackNavOptions = {
@@ -105,6 +108,21 @@ const FilmMainNavigator = createDrawerNavigator({
         labelStyle: {
             fontFamily: "open-sans-bold"
         }
+    },
+    contentComponent: props => {
+        const dispatch = useDispatch();
+
+        return (
+            <View style={{ flex: 1, paddingTop: 20 }}>
+                <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
+                    <DrawerNavigatorItems {...props} />
+                    <Button title="Logout" color={Colors.primary} onPress={() => {
+                        dispatch(authActions.logOut())
+                        props.navigation.navigate('Auth')
+                    }} />
+                </SafeAreaView>
+            </View>
+        )
     }
 })
 
@@ -113,6 +131,7 @@ const AuthNavigator = createStackNavigator({
 })
 
 const SwitchNavigator = createSwitchNavigator({
+    StartupScreen: StartupScreen,
     Auth: AuthNavigator,
     Film: FilmMainNavigator
 })
