@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import CustomHeaderButton from '../../UI/HeaderButton';
 import DefaultText from '../../UI/DefaultText';
 import { toggleFav } from '../../../store/actions/films';
+import Constants from '../../../constants/constants';
 
 const FilmDetail = props => {
     const availableFilms = useSelector(state => state.filmReducer.films);
@@ -32,10 +33,10 @@ const FilmDetail = props => {
     return (
         <ScrollView>
             <View style={styles.image}>
-                <Image source={{ uri: selectedFilm.imageUrl }} style={styles.image} />
+                <Image source={{ uri: (selectedFilm.imageUrl !== "" ? selectedFilm.imageUrl : Constants.defaultFilmImg) }} style={styles.image} />
             </View>
             <View style={styles.details}>
-                <DefaultText>{props.duration} min.</DefaultText>
+                <DefaultText>{selectedFilm.duration} min.</DefaultText>
             </View>
             <View style={styles.mainContainer}>
                 <Text>{selectedFilm.title}</Text>

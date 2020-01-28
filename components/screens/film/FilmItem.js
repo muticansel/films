@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 
-import DefaultText from './UI/DefaultText';
+import DefaultText from '../../UI/DefaultText';
+import Constants from '../../../constants/constants';
 
 const FilmItem = props => {
     return (
@@ -9,7 +10,7 @@ const FilmItem = props => {
             <TouchableOpacity onPress={props.onSelectFilm}>
                 <View>
                     <View style={{ ...styles.filmRow, ...styles.filmHeader }}>
-                        <ImageBackground source={{ uri: props.image }} style={styles.img}>
+                        <ImageBackground source={{ uri: props.image ? props.image : Constants.defaultFilmImg }} style={styles.img}>
                             <Text style={styles.title}>{props.title}</Text>
                         </ImageBackground>
                     </View>

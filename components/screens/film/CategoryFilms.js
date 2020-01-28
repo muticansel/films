@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import { CATEGORIES } from '../../../constants/categories';
-import FilmList from '../../FilmList';
+import FilmList from './FilmList';
 import * as filmActions from '../../../store/actions/films';
 
 const CategoryFilms = props => {

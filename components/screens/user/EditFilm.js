@@ -24,7 +24,9 @@ const EditFilm = props => {
     const [imageUrl, setImageUrl] = useState(
         editedFilm ? editedFilm.imageUrl : ''
     );
-    const [price, setPrice] = useState('');
+    const [duration, setDuration] = useState(editedFilm ? editedFilm.duration : 0);
+    const [imdbScore, setImdbScore] = useState(editedFilm ? editedFilm.imdbScore : 0);
+    const [director, setDirector] = useState(editedFilm ? editedFilm.director : '')
     const [year, setYear] = useState(
         editedFilm ? editedFilm.year : ''
     );
@@ -36,11 +38,11 @@ const EditFilm = props => {
             );
         } else {
             dispatch(
-                filmActions.createFilm(title, "120", "7.8", year, "Martin Scor", imageUrl)
+                filmActions.createFilm(title, duration, imdbScore, year, director, imageUrl)
             );
         }
         props.navigation.goBack();
-    }, [dispatch, filmId, title, year, imageUrl, price]);
+    }, [dispatch, filmId, title, duration, year, imdbScore, director, imageUrl]);
 
     useEffect(() => {
         props.navigation.setParams({ submit: submitHandler });
@@ -55,6 +57,30 @@ const EditFilm = props => {
                         style={styles.input}
                         value={title}
                         onChangeText={text => setTitle(text)}
+                    />
+                </View>
+                <View style={styles.formControl}>
+                    <Text style={styles.label}>Director</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={director}
+                        onChangeText={text => setDirector(text)}
+                    />
+                </View>
+                <View style={styles.formControl}>
+                    <Text style={styles.label}>Duration</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={duration}
+                        onChangeText={text => setDuration(text)}
+                    />
+                </View>
+                <View style={styles.formControl}>
+                    <Text style={styles.label}>IMDB Score</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={imdbScore}
+                        onChangeText={text => setImdbScore(text)}
                     />
                 </View>
                 <View style={styles.formControl}>

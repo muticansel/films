@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux'
-import FilmList from '../../FilmList';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
+import FilmList from './FilmList';
 import CustomHeaderButton from '../../UI/HeaderButton';
 import DefaultText from '../../UI/DefaultText';
 

@@ -26,10 +26,11 @@ export const fetchFilms = () => {
                 resData[key].imdbScore,
                 resData[key].year,
                 resData[key].director,
-                resData[key].stars,
+                ["Great Actor"],
                 resData[key].imageUrl
             ))
         }
+        
         dispatch({ type: SET_FILMS, films: loadedFilms })
 
     }
@@ -43,30 +44,30 @@ export const createFilm = (title, duration, imdbScore, year, director, imageUrl)
                 'Content-Type': 'application/json,'
             },
             body: JSON.stringify({
+                categoryIds: ["c1"],
                 title,
                 duration,
                 imdbScore,
                 year,
                 director,
+                stars: ["Great Actor"],
                 imageUrl
             })
         })
 
-        console.log(response)
-
         const resData = await response.json();
-
-        console.log(resData)
 
         dispatch({
             type: CREATE_FILM,
             filmData: {
                 id: resData.name,
+                categoryIds: ["c1"],
                 title,
                 duration,
                 imdbScore,
                 year,
                 director,
+                stars: ["Great Actor"],
                 imageUrl
 
             }

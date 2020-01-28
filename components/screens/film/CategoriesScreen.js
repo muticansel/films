@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, FlatList, View, Text, TouchableOpacity, Platform } from 'react-native';
 
 import { CATEGORIES } from '../../../constants/categories';
-import CategoryGrid from '../../CategoryGrid';
+import CategoryGrid from '../../UI/CategoryGrid';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import CustomHeaderButton from '../../UI/HeaderButton';

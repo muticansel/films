@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import FilmItem from './FilmItem';
-import * as filmActions from '../store/actions/films';
+import * as filmActions from '../../../store/actions/films';
 
 const MealList = props => {
     const favFilms = useSelector(state => state.filmReducer.favoriteFilms);

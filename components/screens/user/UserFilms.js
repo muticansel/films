@@ -5,7 +5,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import HeaderButton from '../../../components/UI/HeaderButton';
 
-import FilmList from '../../FilmList';
+import FilmList from '../film/FilmList';
 
 const UserFilms = props => {
     const userFilms = useSelector(state => state.filmReducer.films);

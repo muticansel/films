@@ -1,11 +1,10 @@
-import { FILMS } from '../../constants/categories';
 import { TOGGLE_FAVORITE, CREATE_FILM, SET_FILMS } from '../actions/films';
 
 import Film from '../../models/film';
 
 const initialState = {
-    films: FILMS,
-    filteredFilms: FILMS,
+    films: [],
+    filteredFilms: [],
     favoriteFilms: []
 }
 
@@ -29,15 +28,15 @@ const filmReducer = (state = initialState, action) => {
             }
         case CREATE_FILM:
             const newFilm = new Film(
-                action.productData.id,
-                ["c1"],
-                action.productData.title,
-                action.productData.duration,
-                action.productData.imdbScore,
-                action.productData.year,
-                action.productData.director,
-                ["Al Pacino", "YYY"],
-                action.productData.imageUrl
+                action.filmData.id,
+                action.filmData.categoryIds,
+                action.filmData.title,
+                action.filmData.duration,
+                action.filmData.imdbScore,
+                action.filmData.year,
+                action.filmData.director,
+                action.filmData.stars,
+                action.filmData.imageUrl
             );
             return {
                 ...state,
