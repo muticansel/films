@@ -18,6 +18,7 @@ const EditFilm = props => {
     const editedFilm = useSelector(state =>
         state.filmReducer.films.find(film => film.id === filmId)
     );
+
     const dispatch = useDispatch();
 
     const [title, setTitle] = useState(editedFilm ? editedFilm.title : '');
@@ -34,7 +35,7 @@ const EditFilm = props => {
     const submitHandler = useCallback(() => {
         if (editedFilm) {
             dispatch(
-                filmActions.updateProduct(filmId, title, year, imageUrl)
+                filmActions.updateFilm(filmId, title, duration, imdbScore, year, director, imageUrl)
             );
         } else {
             dispatch(

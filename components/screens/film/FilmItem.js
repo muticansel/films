@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 
-import DefaultText from '../../UI/DefaultText';
 import Constants from '../../../constants/constants';
 
 const FilmItem = props => {
@@ -15,7 +14,7 @@ const FilmItem = props => {
                         </ImageBackground>
                     </View>
                     <View style={{ ...styles.filmRow, ...styles.filmDetail }}>
-                        <DefaultText>{props.duration} min.</DefaultText>
+                        {props.children}
                     </View>
                 </View>
             </TouchableOpacity>
@@ -25,7 +24,7 @@ const FilmItem = props => {
 
 const styles = StyleSheet.create({
     filmItem: {
-        height: 200,
+        height: 300,
         width: '100%',
         backgroundColor: '#f5f5f5',
         borderRadius: 10,

@@ -1,6 +1,6 @@
 import React from 'react';
-import { FlatList, Button, Platform, Alert } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { Platform } from 'react-native';
+import { useSelector } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import HeaderButton from '../../../components/UI/HeaderButton';
@@ -9,11 +9,17 @@ import FilmList from '../film/FilmList';
 
 const UserFilms = props => {
     const userFilms = useSelector(state => state.filmReducer.films);
-    const dispatch = useDispatch();
+
+    const selectItemHandler = (id, isFav) => {
+        props.navigation.navigate('FilmDetail', {
+            filmId: id,
+            isFav: isFav
+        })
+    }
 
     return (
         <FilmList listData={userFilms}
-            navigation={props.navigation} />
+            navigation={props.navigation} userFilms />
     )
 }
 
