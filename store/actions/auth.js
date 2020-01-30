@@ -76,7 +76,7 @@ export const loginFB = (token, userId, expiresIn) => {
     return async dispatch => {
         const expirationDate = new Date(new Date().getTime() + parseInt(expiresIn) * 1000);
         dispatch(authenticate(token, userId));
-        saveDataToStorage(token, userId,new Date(expirationDate));
+        saveDataToStorage(token, userId, new Date(expirationDate));
     }
 }
 
