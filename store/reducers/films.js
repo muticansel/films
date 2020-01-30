@@ -58,16 +58,11 @@ const filmReducer = (state = initialState, action) => {
                 action.filmData.imageUrl
             );
 
-            console.log(action.filmData.year)
-
             const updatedUserFilms = [...state.userFilms];
             updatedUserFilms[userFilmIndex] = updatedFilm;
 
             const updatedFilms = [...state.films];
             updatedFilms[filmIndex] = updatedFilm;
-
-            console.log(updatedFilms)
-            console.log(updatedUserFilms)
 
             return {
                 ...state,

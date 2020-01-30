@@ -39,8 +39,10 @@ export const fetchFilms = () => {
 }
 
 export const createFilm = (title, duration, imdbScore, year, director, imageUrl) => {
-    return async dispatch => {
-        const response = await fetch('https://films-a6c4d.firebaseio.com/films.json', {
+    return async (dispatch, getState) => {
+        const token = getState().authReducer.token
+
+        const response = await fetch(`https://films-a6c4d.firebaseio.com/films.json?auth=${token}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json,'
@@ -78,8 +80,10 @@ export const createFilm = (title, duration, imdbScore, year, director, imageUrl)
 }
 
 export const updateFilm = (id, title, duration, imdbScore, year, director, imageUrl) => {
-    return async dispatch => {
-        const response = await fetch(`https://films-a6c4d.firebaseio.com/films/${id}.json`, {
+    return async (dispatch, getState) => {
+        const token = getState().authReducer.token
+
+        const response = await fetch(`https://films-a6c4d.firebaseio.com/films/${id}.json?auth=${token}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json,'

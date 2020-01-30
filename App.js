@@ -9,11 +9,13 @@ import thunk from 'redux-thunk';
 
 import FilmsNavigator from './navigation/FilmsNavigator';
 import filmReducer from './store/reducers/films';
+import authReducer from './store/reducers/auth';
 
 enableScreens();
 
 const rootReducer = combineReducers({
-  filmReducer: filmReducer
+  filmReducer: filmReducer,
+  authReducer: authReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
