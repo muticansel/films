@@ -4,7 +4,7 @@ import Film from '../../models/film';
 
 const initialState = {
     films: [],
-    filteredFilms: [],
+    userFilms: [],
     favoriteFilms: []
 }
 
@@ -24,7 +24,7 @@ const filmReducer = (state = initialState, action) => {
             return {
                 ...state,
                 films: action.films,
-                userFilms: action.films
+                userFilms: action.userFilms
             }
         case CREATE_FILM:
             const newFilm = new Film(

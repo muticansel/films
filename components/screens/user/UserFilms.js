@@ -8,7 +8,7 @@ import HeaderButton from '../../../components/UI/HeaderButton';
 import FilmList from '../film/FilmList';
 
 const UserFilms = props => {
-    const userFilms = useSelector(state => state.filmReducer.films);
+    const userFilms = useSelector(state => state.filmReducer.userFilms);
 
     const selectItemHandler = (id, isFav) => {
         props.navigation.navigate('FilmDetail', {

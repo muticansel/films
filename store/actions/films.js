@@ -11,7 +11,9 @@ export const toggleFav = (id) => {
 }
 
 export const fetchFilms = () => {
-    return async dispatch => {
+    return async (dispatch, getState) => {
+        const userId = getState().authReducer.userId;
+
         const response = await fetch(
             'https://films-a6c4d.firebaseio.com/films.json'
         );
@@ -29,11 +31,12 @@ export const fetchFilms = () => {
                 resData[key].year,
                 resData[key].director,
                 ["Great Actor"],
-                resData[key].imageUrl
+                resData[key].imageUrl,
+                resData[key].ownerId
             ))
         }
 
-        dispatch({ type: SET_FILMS, films: loadedFilms })
+        dispatch({ type: SET_FILMS, films: loadedFilms, userFilms: loadedFilms.filter(film => film.ownerId === userId ) })
 
     }
 }
@@ -118,8 +121,10 @@ export const updateFilm = (id, title, duration, imdbScore, year, director, image
 }
 
 export const deleteFilm = filmId => {
-    return async dispatch => {
-        await fetch(`https://films-a6c4d.firebaseio.com/films/${filmId}.json`, {
+    return async (dispatch, getState) => {
+        const token = getState().authReducer.token;
+
+        await fetch(`https://films-a6c4d.firebaseio.com/films/${filmId}.json?auth=${token}`, {
             method: 'DELETE'
         })
 
