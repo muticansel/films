@@ -20,10 +20,12 @@ const FilmList = props => {
 
     const deleteHandler = (id) => {
         Alert.alert('Are you sure', 'Do you really want to delete this item?', [
-            { text: 'No', style: 'default'},
-            { text: 'Yes', style: 'destructive', onPress:() => {
-                dispatch(filmActions.deleteFilm(id))
-            }}
+            { text: 'No', style: 'default' },
+            {
+                text: 'Yes', style: 'destructive', onPress: () => {
+                    dispatch(filmActions.deleteFilm(id))
+                }
+            }
         ])
     }
 
@@ -39,14 +41,18 @@ const FilmList = props => {
                 }}>
                 {props.userFilms && (
                     <View style={styles.buttons}>
-                        <Button color={Colors.primary}
-                            title="Edit"
-                            onPress={() => {
-                                selectItemHandler(itemData.item.id, isFav)
-                            }} />
-                        <Button color={Colors.primary}
-                            title="Delete"
-                            onPress={deleteHandler.bind(this, itemData.item.id)} />
+                        <View style={styles.button}>
+                            <Button color={Colors.accentColor}
+                                title="Edit"
+                                onPress={() => {
+                                    selectItemHandler(itemData.item.id, isFav)
+                                }} />
+                        </View>
+                        <View style={styles.button}>
+                            <Button style={styles.button} color={Colors.accentColor}
+                                title="Delete"
+                                onPress={deleteHandler.bind(this, itemData.item.id)} />
+                        </View>
                     </View>
                 )}
             </FilmItem>
@@ -73,6 +79,11 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between'
+    },
+    button: {
+        borderRadius: 10,
+        overflow: 'hidden'
+
     }
 })
 

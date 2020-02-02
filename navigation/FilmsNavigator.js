@@ -89,7 +89,7 @@ const tabScreenConfig = {
                     size={25}
                     color={tabInfo.tintColor} />
             },
-            tabBarColor: Colors.accentColor
+            tabBarColor: Colors.primary
         }
     }
 }
