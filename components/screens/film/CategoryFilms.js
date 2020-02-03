@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
-import { CATEGORIES } from '../../../constants/categories';
+import Constants from '../../../constants/constants';
 import FilmList from './FilmList';
 import * as filmActions from '../../../store/actions/films';
 
@@ -23,7 +23,7 @@ const CategoryFilms = props => {
 
 CategoryFilms.navigationOptions = navData => {
     const catId = navData.navigation.getParam('categoryId');
-    const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
+    const selectedCategory = Constants.categories.find(cat => cat.id === catId);
 
     return {
         headerTitle: selectedCategory.title

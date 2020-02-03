@@ -24,7 +24,7 @@ export const fetchFilms = () => {
         for (const key in resData) {
             loadedFilms.push(new Film(
                 key,
-                ["c1"],
+                resData[key].categoryIds,
                 resData[key].title,
                 resData[key].duration,
                 resData[key].imdbScore,
@@ -41,7 +41,7 @@ export const fetchFilms = () => {
     }
 }
 
-export const createFilm = (title, duration, imdbScore, year, director, imageUrl) => {
+export const createFilm = (title, duration, imdbScore, year, director, imageUrl, categoryIds) => {
     return async (dispatch, getState) => {
         const token = getState().authReducer.token;
         const userId = getState().authReducer.userId;
@@ -52,7 +52,7 @@ export const createFilm = (title, duration, imdbScore, year, director, imageUrl)
                 'Content-Type': 'application/json,'
             },
             body: JSON.stringify({
-                categoryIds: ["c1"],
+                categoryIds,
                 title,
                 duration,
                 imdbScore,
@@ -70,7 +70,7 @@ export const createFilm = (title, duration, imdbScore, year, director, imageUrl)
             type: CREATE_FILM,
             filmData: {
                 id: resData.name,
-                categoryIds: ["c1"],
+                categoryIds,
                 title,
                 duration,
                 imdbScore,
@@ -84,10 +84,10 @@ export const createFilm = (title, duration, imdbScore, year, director, imageUrl)
     }
 }
 
-export const updateFilm = (id, title, duration, imdbScore, year, director, imageUrl) => {
+export const updateFilm = (id, title, duration, imdbScore, year, director, imageUrl, categoryIds) => {
     return async (dispatch, getState) => {
-        const token = getState().authReducer.token
-
+        const token = getState().authReducer.token;
+        
         const response = await fetch(`https://films-a6c4d.firebaseio.com/films/${id}.json?auth=${token}`, {
             method: 'PATCH',
             headers: {
@@ -99,7 +99,8 @@ export const updateFilm = (id, title, duration, imdbScore, year, director, image
                 imdbScore,
                 year,
                 director,
-                imageUrl
+                imageUrl,
+                categoryIds
             })
         })
 
@@ -107,7 +108,7 @@ export const updateFilm = (id, title, duration, imdbScore, year, director, image
             type: UPDATE_FILM,
             pid: id,
             filmData: {
-                categoryIds: ["c1"],
+                categoryIds,
                 title,
                 duration,
                 imdbScore,

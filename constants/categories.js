@@ -1,5 +1,4 @@
 import Category from '../models/category';
-import Film from '../models/film';
 
 export const CATEGORIES = [
     new Category('c1', 'Horror', '#f5428d'),

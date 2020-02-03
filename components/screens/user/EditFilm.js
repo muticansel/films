@@ -11,6 +11,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
 
 import HeaderButton from '../../UI/HeaderButton';
+import CategoryPicker from '../../UI/CategoryPicker';
 import * as filmActions from '../../../store/actions/films';
 
 const EditFilm = props => {
@@ -25,25 +26,24 @@ const EditFilm = props => {
     const [imageUrl, setImageUrl] = useState(
         editedFilm ? editedFilm.imageUrl : ''
     );
-    const [duration, setDuration] = useState(editedFilm ? editedFilm.duration : 0);
-    const [imdbScore, setImdbScore] = useState(editedFilm ? editedFilm.imdbScore : 0);
+    const [duration, setDuration] = useState(editedFilm ? editedFilm.duration : '');
+    const [imdbScore, setImdbScore] = useState(editedFilm ? editedFilm.imdbScore : '');
     const [director, setDirector] = useState(editedFilm ? editedFilm.director : '')
-    const [year, setYear] = useState(
-        editedFilm ? editedFilm.year : ''
-    );
+    const [category, setCategory] = useState(editedFilm ? editedFilm.categoryIds[0] : '')
+    const [year, setYear] = useState(editedFilm ? editedFilm.year : '');
 
     const submitHandler = useCallback(() => {
         if (editedFilm) {
             dispatch(
-                filmActions.updateFilm(filmId, title, duration, imdbScore, year, director, imageUrl)
+                filmActions.updateFilm(filmId, title, duration, imdbScore, year, director, imageUrl, [category])
             );
         } else {
             dispatch(
-                filmActions.createFilm(title, duration, imdbScore, year, director, imageUrl)
+                filmActions.createFilm(title, duration, imdbScore, year, director, imageUrl, [category])
             );
         }
         props.navigation.goBack();
-    }, [dispatch, filmId, title, duration, year, imdbScore, director, imageUrl]);
+    }, [dispatch, filmId, title, duration, year, imdbScore, director, imageUrl, category]);
 
     useEffect(() => {
         props.navigation.setParams({ submit: submitHandler });
@@ -100,6 +100,14 @@ const EditFilm = props => {
                         onChangeText={text => setYear(text)}
                     />
                 </View>
+                <View style={styles.formControl}>
+                    <Text style={styles.label}>Category</Text>
+                    <CategoryPicker style={styles.input}
+                        cat={category}
+                        onSelectPicker={(val) => {
+                            setCategory(val)
+                        }} />
+                </View>
             </View>
         </ScrollView>
     );
@@ -110,7 +118,7 @@ EditFilm.navigationOptions = navData => {
     return {
         headerTitle: navData.navigation.getParam('filmId')
             ? 'Edit Film'
-            : 'Add Film+',
+            : 'Add Film',
         headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item

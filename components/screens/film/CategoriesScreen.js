@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { StyleSheet, FlatList, ActivityIndicator, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 
-import { CATEGORIES } from '../../../constants/categories';
+import Constants from '../../../constants/constants';
 import CategoryGrid from '../../UI/CategoryGrid';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../../UI/HeaderButton';
@@ -36,7 +36,7 @@ const CategoriesScreen = props => {
 
     const renderGridItem = itemData => {
         return (
-            <CategoryGrid title={itemData.item.title}
+            <CategoryGrid title={itemData.item.name}
                 color={itemData.item.color}
                 onSelect={() => props.navigation.navigate('CategoryFilms', {
                     categoryId: itemData.item.id
@@ -62,7 +62,7 @@ const CategoriesScreen = props => {
 
     return (
         <FlatList numColumns={2}
-            data={CATEGORIES}
+            data={Constants.categories}
             renderItem={renderGridItem} />
     )
 }
