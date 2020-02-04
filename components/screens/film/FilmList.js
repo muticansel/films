@@ -12,7 +12,7 @@ const FilmList = props => {
     const dispatch = useDispatch();
 
     const selectItemHandler = (id, isFav) => {
-        props.navigation.navigate('EditFilm', {
+        props.navigation.navigate('FilmDetail', {
             filmId: id,
             isFav: isFav
         })
