@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
 import { AppLoading } from 'expo';
 import { enableScreens } from 'react-native-screens'
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -23,7 +24,10 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 const fetchFonts = () => {
   return Font.loadAsync({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+    Roboto: require('native-base/Fonts/Roboto.ttf'),
+    Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+    ...Ionicons.font,
   })
 }
 
