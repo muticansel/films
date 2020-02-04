@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import FilmList from './FilmList';
-import CustomHeaderButton from '../../UI/HeaderButton';
+import DrawerButton from '../../UI/HeaderDrawerButton';
 import DefaultText from '../../UI/DefaultText';
 
 const Favorites = props => {
@@ -26,14 +26,10 @@ const Favorites = props => {
 Favorites.navigationOptions = navData => {
     return {
         headerTitle: 'Favorites',
-        headerLeft: () => (
-
-            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-                <Item title="Menu" iconName="ios-menu" onPress={() => {
-                    navData.navigation.toggleDrawer()
-                }} />
-            </HeaderButtons>
-        )
+        headerLeft: () =>
+            <DrawerButton toggleDrawerHandler={() => {
+                navData.navigation.toggleDrawer()
+            }} />
     }
 }
 

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { StyleSheet, FlatList, ActivityIndicator, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
-
-import Constants from '../../../constants/constants';
 import CategoryGrid from '../../UI/CategoryGrid';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import CustomHeaderButton from '../../UI/HeaderButton';
+
+import Constants from '../../../constants/constants';
+import DrawerButton from '../../UI/HeaderDrawerButton';
 import DefaultText from '../../UI/DefaultText';
 import * as filmActions from '../../../store/actions/films'
 import Colors from '../../../constants/colors';
@@ -70,13 +70,10 @@ const CategoriesScreen = props => {
 CategoriesScreen.navigationOptions = navData => {
     return {
         headerTitle: 'Film Categories',
-        headerLeft: () => (
-            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-                <Item title="Menu" iconName="ios-menu" onPress={() => {
-                    navData.navigation.toggleDrawer()
-                }} />
-            </HeaderButtons>
-        )
+        headerLeft: () =>
+            <DrawerButton toggleDrawerHandler={() => {
+                navData.navigation.toggleDrawer()
+            }} />
     }
 }
 

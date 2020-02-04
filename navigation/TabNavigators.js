@@ -5,7 +5,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import Colors from '../constants/colors'
-import { FilmsStackNavigator, FavStackNavigator } from './StackNavigators'
+import { FilmsStackNavigator, FavStackNavigator, StarsStackNavigator, DirectorsStackNavigator } from './StackNavigators';
 
 const tabScreenConfig = {
     Films: {
@@ -32,6 +32,31 @@ const tabScreenConfig = {
     }
 }
 
+const starsTabScreenConfig = {
+    Stars: {
+        screen: StarsStackNavigator,
+        navigationOptions: {
+            tabBarIcon: tabInfo => {
+                return <FontAwesome name="star"
+                    size={25}
+                    color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.primary
+        }
+    },
+    Directors: {
+        screen: DirectorsStackNavigator,
+        navigationOptions: {
+            tabBarIcon: tabInfo => {
+                return <FontAwesome name="video-camera"
+                    size={25}
+                    color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.primary
+        }
+    }
+}
+
 export const FilmTabNavigator = Platform.OS === 'android'
     ? createMaterialBottomTabNavigator(tabScreenConfig, {
         activeColor: 'white',
@@ -41,6 +66,23 @@ export const FilmTabNavigator = Platform.OS === 'android'
         }
     })
     : createBottomTabNavigator(tabScreenConfig, {
+        tabBarOptions: {
+            labelStyle: {
+                fontFamily: 'open-sans-bold'
+            },
+            activeTintColor: Colors.accentColor
+        }
+    })
+
+export const StarsTabNavigator = Platform.OS === 'android'
+    ? createMaterialBottomTabNavigator(starsTabScreenConfig, {
+        activeColor: 'white',
+        shifting: true,
+        barStyle: {
+            backgroundColor: Colors.primary
+        }
+    })
+    : createBottomTabNavigator(starsTabScreenConfig, {
         tabBarOptions: {
             labelStyle: {
                 fontFamily: 'open-sans-bold'

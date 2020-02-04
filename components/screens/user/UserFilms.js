@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import HeaderButton from '../../../components/UI/HeaderButton';
-
+import DrawerButton from '../../UI/HeaderDrawerButton';
 import FilmList from '../film/FilmList';
 
 const UserFilms = props => {
@@ -26,17 +26,10 @@ const UserFilms = props => {
 UserFilms.navigationOptions = navData => {
     return {
         headerTitle: 'Your Films',
-        headerLeft: () => (
-            <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item
-                    title="Menu"
-                    iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
-                    onPress={() => {
-                        navData.navigation.toggleDrawer();
-                    }}
-                />
-            </HeaderButtons>
-        ),
+        headerLeft: () =>
+            <DrawerButton toggleDrawerHandler={() => {
+                navData.navigation.toggleDrawer()
+            }} />,
         headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item

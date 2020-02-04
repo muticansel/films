@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Platform } from 'react-native'
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 import Categories from '../components/screens/film/CategoriesScreen';
 import CategoryFilms from '../components/screens/film/CategoryFilms';
@@ -10,6 +10,8 @@ import Favorites from '../components/screens/film/Favorites';
 import UserFilms from '../components/screens/user/UserFilms';
 import EditFilm from '../components/screens/user/EditFilm';
 import AuthScreen from '../components/screens/user/AuthScreen';
+import Stars from '../components/screens/film/Stars';
+import Directors from '../components/screens/film/Directors'
 import Colors from '../constants/colors'
 
 const defaultStackNavOptions = {
@@ -60,6 +62,42 @@ export const AdminStackNavigator = createStackNavigator(
         defaultNavigationOptions: defaultStackNavOptions
     }
 );
+
+// export const StasrsStackNavigator = createStackNavigator(
+//     {
+//         Stars: Stars,
+//         Directors: Directors
+//     },
+//     {
+//         navigationOptions: {
+//             drawerIcon: drawerConfig => (
+//                 <FontAwesome
+//                     name={'star'}
+//                     size={23}
+//                     color={drawerConfig.tintColor}
+//                 />
+//             )
+//         },
+//         defaultNavigationOptions: defaultStackNavOptions
+//     }
+// );
+
+export const StarsStackNavigator = createStackNavigator(
+    {
+        Stars: Stars
+    },
+    {
+        mode: 'modal',
+        defaultNavigationOptions: defaultStackNavOptions
+    }
+)
+
+export const DirectorsStackNavigator = createStackNavigator({
+    Directors: Directors
+}, {
+    mode: 'modal',
+    defaultNavigationOptions: defaultStackNavOptions
+})
 
 export const AuthStackNavigator = createStackNavigator({
     Auth: AuthScreen

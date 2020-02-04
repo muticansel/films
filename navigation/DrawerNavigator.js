@@ -5,7 +5,7 @@ import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-dr
 
 import Colors from '../constants/colors';
 import * as authActions from '../store/actions/auth';
-import { FilmTabNavigator } from './TabNavigators';
+import { FilmTabNavigator, StarsTabNavigator } from './TabNavigators';
 import { AdminStackNavigator } from './StackNavigators'
 
 export const FilmDrawerNavigator = createDrawerNavigator({
@@ -20,6 +20,12 @@ export const FilmDrawerNavigator = createDrawerNavigator({
         screen: AdminStackNavigator,
         navigationOptions: {
             drawerLabel: "User Films"
+        }
+    },
+    Stars: {
+        screen: StarsTabNavigator,
+        navigationOptions: {
+            drawerLabel: "Stars / Directors"
         }
     }
 }, {
