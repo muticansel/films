@@ -17,6 +17,7 @@ import Card from '../../UI/Card';
 import Colors from '../../../constants/colors';
 import * as authActions from '../../../store/actions/auth';
 import PrivConstants from '../../../privConstants/constants';
+import firebase from '../../../config/firebase'
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
@@ -113,17 +114,18 @@ const AuthScreen = props => {
             const {
                 type,
                 token,
-                expires,
-                permissions,
-                declinedPermissions,
+                expires
             } = await Facebook.logInWithReadPermissionsAsync({
                 permissions: ['public_profile', 'email'],
             });
             if (type === 'success') {
                 // Get the user's name using Facebook's Graph API
-                const response = await fetch(`https://graph.facebook.com/me?fields=id,name,email&access_token=${token}`);
-                const resFbData = await response.json();
-                await dispatch(authActions.loginFB(token, resFbData.id, expires));
+                await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+                const firebaseCredential = firebase.auth.FacebookAuthProvider.credential(token);
+                const facebookProfileData = await firebase.auth().signInWithCredential(firebaseCredential);
+                const accessToken = await facebookProfileData.user.getIdToken()
+
+                await dispatch(authActions.loginFB(accessToken, facebookProfileData.user.uid, expires));
                 props.navigation.navigate('Film')
             } else {
                 // type === 'cancel'
