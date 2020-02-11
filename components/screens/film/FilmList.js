@@ -18,6 +18,13 @@ const FilmList = props => {
         })
     }
 
+    const editFilmHandler = (id, isFav) => {
+        props.navigation.navigate('EditFilm', {
+            filmId: id,
+            isFav: isFav
+        })
+    }
+
     const deleteHandler = (id) => {
         Alert.alert('Are you sure', 'Do you really want to delete this item?', [
             { text: 'No', style: 'default' },
@@ -45,7 +52,7 @@ const FilmList = props => {
                             <Button color={Colors.accentColor}
                                 title="Edit"
                                 onPress={() => {
-                                    selectItemHandler(itemData.item.id, isFav)
+                                    editFilmHandler(itemData.item.id, isFav)
                                 }} />
                         </View>
                         <View style={styles.button}>
