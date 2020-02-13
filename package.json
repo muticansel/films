@@ -13,6 +13,7 @@
     "expo": "~36.0.0",
     "expo-facebook": "~8.0.0",
     "expo-font": "~8.0.0",
+    "expo-google-app-auth": "^8.0.1",
     "expo-linear-gradient": "~8.0.0",
     "firebase": "^7.8.1",
     "native-base": "^2.13.8",

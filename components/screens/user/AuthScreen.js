@@ -11,6 +11,7 @@ import {
 import { useDispatch } from 'react-redux'
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Facebook from 'expo-facebook';
+import * as Google from 'expo-google-app-auth'
 
 import Input from '../../UI/Input';
 import Card from '../../UI/Card';
@@ -135,6 +136,42 @@ const AuthScreen = props => {
         }
     }
 
+    const logInGoogle = async () => {
+        try {
+            setIsLoading(true);
+
+            const config = {
+                androidClientId: PrivConstants.googleAndroidClientId,
+                iosClientId: PrivConstants.googleIosClientId,
+                scopes: ['profile', 'email']
+            }
+
+            const {
+                type,
+                idToken
+            } = await Google.logInAsync(config);
+            if (type === 'success') {
+                console.log(idToken);
+                // Get the user's name using Facebook's Graph API
+                await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+                const firebaseCredential = firebase.auth.GoogleAuthProvider.credential(idToken);
+                const googleProfileData = await firebase.auth().signInWithCredential(firebaseCredential)
+                console.log("Ok3")
+                //const googleAccessToken = await googleProfileData.user.getIdToken()
+
+                console.log("GOOGLE\n\n");
+
+                //await dispatch(authActions.loginFB(accessToken, facebookProfileData.user.uid, expires));
+                props.navigation.navigate('Film')
+            } else {
+                console.log("An error is occured")
+            }
+        } catch ({ message }) {
+            alert(`Google Login Error: ${message}`);
+            setIsLoading(false);
+        }
+    }
+
     return (
         <KeyboardAvoidingView
             behavior="padding"
@@ -188,8 +225,15 @@ const AuthScreen = props => {
                         <View style={styles.buttonContainer}>
                             <Button
                                 title="Connect with FB"
-                                color={Colors.accent}
+                                color={Colors.facebookBlue}
                                 onPress={logInFb}
+                            />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Button
+                                title="Connect with Google"
+                                color={Colors.googleRed}
+                                onPress={logInGoogle}
                             />
                         </View>
                     </ScrollView>
