@@ -6,29 +6,9 @@ import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-dr
 import Colors from '../constants/colors';
 import * as authActions from '../store/actions/auth';
 import { FilmTabNavigator, StarsTabNavigator } from './TabNavigators';
-import { AdminStackNavigator } from './StackNavigators'
+import { AdminStackNavigator, BaseStackNavigator } from './StackNavigators';
 
-export const FilmDrawerNavigator = createDrawerNavigator({
-    FilmsFav: {
-        screen: FilmTabNavigator,
-        navigationOptions: {
-            drawerLabel: "Films"
-        }
-    },
-    Filters: FilmTabNavigator, // FilterStack
-    UserFilms: {
-        screen: AdminStackNavigator,
-        navigationOptions: {
-            drawerLabel: "User Films"
-        }
-    },
-    Stars: {
-        screen: StarsTabNavigator,
-        navigationOptions: {
-            drawerLabel: "Stars / Directors"
-        }
-    }
-}, {
+const drawerOption = {
     contentOptions: {
         activeTintColor: Colors.accentColor,
         labelStyle: {
@@ -50,4 +30,35 @@ export const FilmDrawerNavigator = createDrawerNavigator({
             </View>
         )
     }
-})
+}
+
+export const FilmDrawerNavigator = createDrawerNavigator({
+    FilmsFav: {
+        screen: FilmTabNavigator,
+        navigationOptions: {
+            drawerLabel: "Films"
+        }
+    },
+    Filters: FilmTabNavigator, // FilterStack
+    UserFilms: {
+        screen: AdminStackNavigator,
+        navigationOptions: {
+            drawerLabel: "User Films"
+        }
+    },
+    Stars: {
+        screen: StarsTabNavigator,
+        navigationOptions: {
+            drawerLabel: "Stars / Directors"
+        }
+    }
+}, drawerOption)
+
+export const AppBaseDrawerNav = createDrawerNavigator({
+    SelectBase: {
+        screen: BaseStackNavigator,
+        navigationOptions: {
+            drawerLabel: "Change the Base"
+        }
+    }
+}, drawerOption)

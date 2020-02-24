@@ -11,7 +11,8 @@ import UserFilms from '../components/screens/user/UserFilms';
 import EditFilm from '../components/screens/user/EditFilm';
 import AuthScreen from '../components/screens/user/AuthScreen';
 import Stars from '../components/screens/film/Stars';
-import Directors from '../components/screens/film/Directors'
+import Directors from '../components/screens/film/Directors';
+import SelectBase from '../components/screens/SelectBase';
 import Colors from '../constants/colors'
 
 const defaultStackNavOptions = {
@@ -59,6 +60,15 @@ export const AdminStackNavigator = createStackNavigator(
                 />
             )
         },
+        defaultNavigationOptions: defaultStackNavOptions
+    }
+);
+
+export const BaseStackNavigator = createStackNavigator(
+    {
+        BaseScreen: SelectBase
+    },
+    {
         defaultNavigationOptions: defaultStackNavOptions
     }
 );

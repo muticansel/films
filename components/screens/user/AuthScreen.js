@@ -88,7 +88,7 @@ const AuthScreen = props => {
         setIsLoading(true);
         try {
             await dispatch(action);
-            props.navigation.navigate('Film')
+            props.navigation.navigate('AppBase')
         } catch (err) {
             setError(err.message);
             setIsLoading(false)
@@ -126,7 +126,7 @@ const AuthScreen = props => {
                 const accessToken = await facebookProfileData.user.getIdToken()
 
                 await dispatch(authActions.loginFB(accessToken, facebookProfileData.user.uid, expires));
-                props.navigation.navigate('Film')
+                props.navigation.navigate('AppBase')
             } else {
                 // type === 'cancel'
             }

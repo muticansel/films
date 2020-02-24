@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { StyleSheet, FlatList, ActivityIndicator, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 import CategoryGrid from '../../UI/CategoryGrid';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import Constants from '../../../constants/constants';
 import DrawerButton from '../../UI/HeaderDrawerButton';
