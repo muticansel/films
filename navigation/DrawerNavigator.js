@@ -51,6 +51,12 @@ export const FilmDrawerNavigator = createDrawerNavigator({
         navigationOptions: {
             drawerLabel: "Stars / Directors"
         }
+    },
+    ChangeTheBase: {
+        screen: BaseStackNavigator,
+        navigationOptions: {
+            drawerLabel: "Change The Base"
+        }
     }
 }, drawerOption)
 
@@ -59,6 +65,12 @@ export const MealDrawerNavigator = createDrawerNavigator({
         screen: MealTabNavigator,
         navigationOptions: {
             drawerLabel: "Meals"
+        }
+    },
+    ChangeTheBase: {
+        screen: BaseStackNavigator,
+        navigationOptions: {
+            drawerLabel: "Change The Base"
         }
     }
 }, drawerOption)
