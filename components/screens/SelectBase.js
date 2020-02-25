@@ -17,7 +17,10 @@ const SelectBase = props => {
     const baseSelected = () => {
         switch (base) {
             case FILMS_BASE:
-                props.navigation.navigate('Films')
+                props.navigation.navigate('Film')
+                break;
+            case MEALS_BASE:
+                props.navigation.navigate('Meal')
                 break;
             default:
                 props.navigation.navigate('AppBase')

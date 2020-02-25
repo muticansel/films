@@ -10,13 +10,15 @@ import thunk from 'redux-thunk';
 
 import FilmsNavigator from './navigation/FilmsNavigator';
 import filmReducer from './store/reducers/films';
+import mealReducer from './store/reducers/meals';
 import authReducer from './store/reducers/auth';
 
 enableScreens();
 
 const rootReducer = combineReducers({
   filmReducer: filmReducer,
-  authReducer: authReducer
+  authReducer: authReducer,
+  mealReducer: mealReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

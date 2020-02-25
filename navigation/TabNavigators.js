@@ -1,11 +1,11 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import Colors from '../constants/colors'
-import { FilmsStackNavigator, FavStackNavigator, StarsStackNavigator, DirectorsStackNavigator } from './StackNavigators';
+import { FilmsStackNavigator, FavStackNavigator, StarsStackNavigator, DirectorsStackNavigator, MealsStackNavigator } from './StackNavigators';
 
 const tabScreenConfig = {
     Films: {
@@ -24,6 +24,20 @@ const tabScreenConfig = {
         navigationOptions: {
             tabBarIcon: tabInfo => {
                 return <Ionicons name="ios-star"
+                    size={25}
+                    color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.primary
+        }
+    }
+}
+
+const mealsTabScreenConfig = {
+    Meals: {
+        screen: MealsStackNavigator,
+        navigationOptions: {
+            tabBarIcon: tabInfo => {
+                return <MaterialCommunityIcons name="food"
                     size={25}
                     color={tabInfo.tintColor} />
             },
@@ -66,6 +80,23 @@ export const FilmTabNavigator = Platform.OS === 'android'
         }
     })
     : createBottomTabNavigator(tabScreenConfig, {
+        tabBarOptions: {
+            labelStyle: {
+                fontFamily: 'open-sans-bold'
+            },
+            activeTintColor: Colors.accentColor
+        }
+    })
+
+export const MealTabNavigator = Platform.OS === 'android'
+    ? createMaterialBottomTabNavigator(mealsTabScreenConfig, {
+        activeColor: 'white',
+        shifting: true,
+        barStyle: {
+            backgroundColor: Colors.primary
+        }
+    })
+    : createBottomTabNavigator(mealsTabScreenConfig, {
         tabBarOptions: {
             labelStyle: {
                 fontFamily: 'open-sans-bold'

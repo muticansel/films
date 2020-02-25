@@ -25,7 +25,7 @@ const StartupScreen = props => {
                 return;
             }
 
-            props.navigation.navigate('Film');
+            props.navigation.navigate('AppBase');
             dispatch(authActions.authenticate(token, userId));
         }
 

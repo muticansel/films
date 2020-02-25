@@ -7,6 +7,7 @@ import Categories from '../components/screens/film/CategoriesScreen';
 import CategoryFilms from '../components/screens/film/CategoryFilms';
 import FilmDetail from '../components/screens/film/FilmDetail';
 import Favorites from '../components/screens/film/Favorites';
+import MealCategories from '../components/screens/meal/MealCategories';
 import UserFilms from '../components/screens/user/UserFilms';
 import EditFilm from '../components/screens/user/EditFilm';
 import AuthScreen from '../components/screens/user/AuthScreen';
@@ -111,4 +112,11 @@ export const DirectorsStackNavigator = createStackNavigator({
 
 export const AuthStackNavigator = createStackNavigator({
     Auth: AuthScreen
+})
+
+export const MealsStackNavigator = createStackNavigator({
+    MealCategories: MealCategories
+}, {
+    mode: 'modal',
+    defaultNavigationOptions: defaultStackNavOptions
 })
