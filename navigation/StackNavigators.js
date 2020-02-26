@@ -10,6 +10,8 @@ import Favorites from '../components/screens/film/Favorites';
 import MealCategories from '../components/screens/meal/MealCategories';
 import UserFilms from '../components/screens/user/UserFilms';
 import EditFilm from '../components/screens/user/EditFilm';
+import UserMeals from '../components/screens/user/UserMeals';
+import EditMeal from '../components/screens/meal/EditMeal';
 import AuthScreen from '../components/screens/user/AuthScreen';
 import Stars from '../components/screens/film/Stars';
 import Directors from '../components/screens/film/Directors';
@@ -114,9 +116,31 @@ export const AuthStackNavigator = createStackNavigator({
     Auth: AuthScreen
 })
 
+//* BEGIN MEALS */
 export const MealsStackNavigator = createStackNavigator({
     MealCategories: MealCategories
 }, {
     mode: 'modal',
     defaultNavigationOptions: defaultStackNavOptions
 })
+
+export const UserMealsStackNav = createStackNavigator(
+    {
+        UserMeals: UserMeals,
+        EditMeal: EditMeal
+    },
+    {
+        navigationOptions: {
+            drawerIcon: drawerConfig => (
+                <Ionicons
+                    name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+                    size={23}
+                    color={drawerConfig.tintColor}
+                />
+            )
+        },
+        defaultNavigationOptions: defaultStackNavOptions
+    }
+)
+
+//* END MEALS */

@@ -6,7 +6,7 @@ import { createDrawerNavigator, DrawerNavigatorItems } from 'react-navigation-dr
 import Colors from '../constants/colors';
 import * as authActions from '../store/actions/auth';
 import { FilmTabNavigator, StarsTabNavigator, MealTabNavigator } from './TabNavigators';
-import { AdminStackNavigator, BaseStackNavigator } from './StackNavigators';
+import { AdminStackNavigator, BaseStackNavigator, UserMealsStackNav } from './StackNavigators';
 
 const drawerOption = {
     contentOptions: {
@@ -65,6 +65,12 @@ export const MealDrawerNavigator = createDrawerNavigator({
         screen: MealTabNavigator,
         navigationOptions: {
             drawerLabel: "Meals"
+        }
+    },
+    UserMeals: {
+        screen: UserMealsStackNav,
+        navigationOptions: {
+            drawerLabel: "User Meals"
         }
     },
     ChangeTheBase: {

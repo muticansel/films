@@ -43,6 +43,17 @@ const mealsTabScreenConfig = {
             },
             tabBarColor: Colors.primary
         }
+    },
+    Sample: {
+        screen: MealsStackNavigator,
+        navigationOptions: {
+            tabBarIcon: tabInfo => {
+                return <MaterialCommunityIcons name="food"
+                    size={25}
+                    color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.primary
+        }
     }
 }
 

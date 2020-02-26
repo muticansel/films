@@ -41,7 +41,7 @@ const SelectBase = props => {
                         <Picker.Item label="Meals" value="meals" />
                     </Picker>
                     <Button success style={{ marginTop: 50 }} onPress={baseSelected}>
-                        <Text>Save</Text>
+                        <Text>Continue</Text>
                     </Button>
                 </Form>
             </Content>

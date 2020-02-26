@@ -12,39 +12,33 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import HeaderButton from '../../UI/HeaderButton';
 import CategoryPicker from '../../UI/CategoryPicker';
-import * as filmActions from '../../../store/actions/films';
+import * as mealActions from '../../../store/actions/meals';
 import Constants from '../../../constants/constants';
 
-const EditFilm = props => {
-    const filmId = props.navigation.getParam('filmId');
-    const editedFilm = useSelector(state =>
-        state.filmReducer.films.find(film => film.id === filmId)
+const EditMeal = props => {
+    const mealId = props.navigation.getParam('mealId');
+    const editedMeal = useSelector(state =>
+        state.mealReducer.meals.find(meal => meal.id === mealId)
     );
 
     const dispatch = useDispatch();
 
-    const [title, setTitle] = useState(editedFilm ? editedFilm.title : '');
-    const [imageUrl, setImageUrl] = useState(
-        editedFilm ? editedFilm.imageUrl : ''
-    );
-    const [duration, setDuration] = useState(editedFilm ? editedFilm.duration : '');
-    const [imdbScore, setImdbScore] = useState(editedFilm ? editedFilm.imdbScore : '');
-    const [director, setDirector] = useState(editedFilm ? editedFilm.director : '')
-    const [category, setCategory] = useState(editedFilm ? editedFilm.categoryIds[0] : '')
-    const [year, setYear] = useState(editedFilm ? editedFilm.year : '');
+    const [title, setTitle] = useState(editedMeal ? editedMeal.title : '');
+    const [duration, setDuration] = useState(editedMeal ? editedMeal.duration : '');
+    const [category, setCategory] = useState(editedMeal ? editedMeal.categoryIds[0] : '')
 
     const submitHandler = useCallback(() => {
-        if (editedFilm) {
+        if (editedMeal) {
             dispatch(
-                filmActions.updateFilm(filmId, title, duration, imdbScore, year, director, imageUrl, [category])
+                mealActions.updateFilm(mealId, title, duration, [category])
             );
         } else {
             dispatch(
-                filmActions.createFilm(title, duration, imdbScore, year, director, imageUrl, [category])
+                mealActions.createFilm(title, duration, [category])
             );
         }
         props.navigation.goBack();
-    }, [dispatch, filmId, title, duration, year, imdbScore, director, imageUrl, category]);
+    }, [dispatch, mealId, title, duration, category]);
 
     useEffect(() => {
         props.navigation.setParams({ submit: submitHandler });
@@ -62,14 +56,6 @@ const EditFilm = props => {
                     />
                 </View>
                 <View style={styles.formControl}>
-                    <Text style={styles.label}>Director</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={director}
-                        onChangeText={text => setDirector(text)}
-                    />
-                </View>
-                <View style={styles.formControl}>
                     <Text style={styles.label}>Duration</Text>
                     <TextInput
                         style={styles.input}
@@ -78,34 +64,10 @@ const EditFilm = props => {
                     />
                 </View>
                 <View style={styles.formControl}>
-                    <Text style={styles.label}>IMDB Score</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={imdbScore}
-                        onChangeText={text => setImdbScore(text)}
-                    />
-                </View>
-                <View style={styles.formControl}>
-                    <Text style={styles.label}>Image URL</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={imageUrl}
-                        onChangeText={text => setImageUrl(text)}
-                    />
-                </View>
-                <View style={styles.formControl}>
-                    <Text style={styles.label}>Year</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={year}
-                        onChangeText={text => setYear(text)}
-                    />
-                </View>
-                <View style={styles.formControl}>
                     <Text style={styles.label}>Category</Text>
                     <CategoryPicker style={styles.input}
+                        items={Constants.meals}
                         cat={category}
-                        items={Constants.categories}
                         onSelectPicker={(val) => {
                             setCategory(val)
                         }} />
@@ -115,10 +77,10 @@ const EditFilm = props => {
     );
 };
 
-EditFilm.navigationOptions = navData => {
+EditMeal.navigationOptions = navData => {
     const submitFn = navData.navigation.getParam('submit');
     return {
-        headerTitle: navData.navigation.getParam('filmId')
+        headerTitle: navData.navigation.getParam('mealId')
             ? 'Edit Film'
             : 'Add Film',
         headerRight: () => (
@@ -154,4 +116,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default EditFilm;
+export default EditMeal;

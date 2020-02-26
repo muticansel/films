@@ -18,9 +18,9 @@ const CategoryPicker = props => {
             iosHeader="Category"
             iosIcon={<Icon name="arrow-down" />}
             onValueChange={(cat) => { catSelect(cat) }}>
-            {Constants.categories.map(cat => {
+            {props.items.map(item => {
                 return (
-                    <Picker.Item key={cat.id} label={cat.name} value={cat.id} />
+                    <Picker.Item key={item.id} label={item.name} value={item.id} />
                 )
             })}
         </Picker>
