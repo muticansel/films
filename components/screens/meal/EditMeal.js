@@ -2,16 +2,17 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
     View,
     ScrollView,
-    Text,
     TextInput,
     StyleSheet,
     Platform
 } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
+import { Card, CardItem, Button, Text } from 'native-base'
 
 import HeaderButton from '../../UI/HeaderButton';
 import CategoryPicker from '../../UI/CategoryPicker';
+import ListItem from '../../UI/ListItem';
 import * as mealActions from '../../../store/actions/meals';
 import Constants from '../../../constants/constants';
 
@@ -26,6 +27,10 @@ const EditMeal = props => {
     const [title, setTitle] = useState(editedMeal ? editedMeal.title : '');
     const [duration, setDuration] = useState(editedMeal ? editedMeal.duration : '');
     const [category, setCategory] = useState(editedMeal ? editedMeal.categoryIds[0] : '')
+    const [newIngr, setNewIngr] = useState("")
+    const [ingredients, setIngredients] = useState([])
+    const [newStep, setNewStep] = useState("")
+    const [steps, setSteps] = useState([])
 
     const submitHandler = useCallback(() => {
         if (editedMeal) {
@@ -39,6 +44,16 @@ const EditMeal = props => {
         }
         props.navigation.goBack();
     }, [dispatch, mealId, title, duration, category]);
+
+    const addIngredient = () => {
+        setIngredients(currentIngredients => [...currentIngredients, newIngr])
+        setNewIngr("");
+    }
+
+    const addStep = () => {
+        setSteps(currentSteps => [...currentSteps, newStep])
+        setNewStep("")
+    }
 
     useEffect(() => {
         props.navigation.setParams({ submit: submitHandler });
@@ -71,6 +86,20 @@ const EditMeal = props => {
                         onSelectPicker={(val) => {
                             setCategory(val)
                         }} />
+                </View>
+                <View style={styles.formControl}>
+                    <Text style={styles.label}>Ingredients</Text>
+                    <ListItem newItem={newIngr}
+                        newItemHandler={setNewIngr}
+                        addNewItem={addIngredient}
+                        items={ingredients} />
+                </View>
+                <View style={styles.formControl}>
+                    <Text style={styles.label}>Steps</Text>
+                    <ListItem newItem={newStep}
+                        newItemHandler={setNewStep}
+                        addNewItem={addStep}
+                        items={steps} />
                 </View>
             </View>
         </ScrollView>
@@ -113,6 +142,17 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         borderBottomColor: '#ccc',
         borderBottomWidth: 1
+    },
+    listItem: {
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    listItemTextInput: {
+        width: '80%',
+        borderColor: 'black',
+        borderWidth: 1,
+        padding: 10
     }
 });
 
