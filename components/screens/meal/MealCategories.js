@@ -12,7 +12,6 @@ import Colors from '../../../constants/colors';
 
 const MealCategories = props => {
     const [isLoading, setIsLoading] = useState(false);
-    const meals = useSelector(state => state.mealReducer.meals);
     const dispatch = useDispatch()
 
     const loadMeals = useCallback(async () => {

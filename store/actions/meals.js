@@ -26,10 +26,11 @@ export const fetchMeals = () => {
                 key,
                 resData[key].categoryIds,
                 resData[key].title,
-                resData[key].duration,
                 resData[key].ingredients,
+                resData[key].duration,
                 resData[key].steps,
-                resData[key].score
+                resData[key].score,
+                resData[key].ownerId
             ))
         }
 

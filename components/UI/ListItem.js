@@ -8,7 +8,7 @@ const ListItem = props => {
             <Card>
                 <CardItem>
                     <View style={styles.listItem}>
-                        <TextInput placeholder="Add Steps"
+                        <TextInput placeholder={props.placeholder}
                             style={styles.listItemTextInput}
                             onChangeText={props.newItemHandler}
                             value={props.newItem} />

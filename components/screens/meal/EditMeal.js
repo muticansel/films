@@ -39,7 +39,7 @@ const EditMeal = props => {
             );
         } else {
             dispatch(
-                mealActions.createMeal(title, duration, [category], ingredients, steps)
+                mealActions.createMeal(title, duration, [category], ingredients, steps, "")
             );
         }
         props.navigation.goBack();
@@ -92,14 +92,16 @@ const EditMeal = props => {
                     <ListItem newItem={newIngr}
                         newItemHandler={setNewIngr}
                         addNewItem={addIngredient}
-                        items={ingredients} />
+                        items={ingredients}
+                        placeholder="Add Ingredient" />
                 </View>
                 <View style={styles.formControl}>
                     <Text style={styles.label}>Steps</Text>
                     <ListItem newItem={newStep}
                         newItemHandler={setNewStep}
                         addNewItem={addStep}
-                        items={steps} />
+                        items={steps}
+                        placeholder="Add Step" />
                 </View>
             </View>
         </ScrollView>
