@@ -35,11 +35,11 @@ const EditMeal = props => {
     const submitHandler = useCallback(() => {
         if (editedMeal) {
             dispatch(
-                mealActions.updateFilm(mealId, title, duration, [category])
+                mealActions.updateMeal(mealId, title, duration, [category], ingredients, steps)
             );
         } else {
             dispatch(
-                mealActions.createFilm(title, duration, [category])
+                mealActions.createMeal(title, duration, [category], ingredients, steps)
             );
         }
         props.navigation.goBack();

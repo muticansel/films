@@ -28,13 +28,13 @@ const mealReducer = (state = initialState, action) => {
             }
         case CREATE_MEAL:
             const newMeal = new Meal(
-                action.filmData.id,
-                action.filmData.categoryIds,
-                action.filmData.title,
-                action.filmData.ingredients,
-                action.filmData.steps,
-                action.filmData.score,
-                action.filmData.duration
+                action.mealData.id,
+                action.mealData.categoryIds,
+                action.mealData.title,
+                action.mealData.ingredients,
+                action.mealData.steps,
+                action.mealData.score,
+                action.mealData.duration
             );
             return {
                 ...state,
@@ -46,12 +46,12 @@ const mealReducer = (state = initialState, action) => {
 
             const updatedMeal = new Meal(
                 action.pid,
-                action.filmData.categoryIds,
-                action.filmData.title,
-                action.filmData.duration,
-                action.filmData.ingredients,
-                action.filmData.steps,
-                action.filmData.score
+                action.mealData.categoryIds,
+                action.mealData.title,
+                action.mealData.duration,
+                action.mealData.ingredients,
+                action.mealData.steps,
+                action.mealData.score
             );
 
             const updateduserMeals = [...state.userMeals];

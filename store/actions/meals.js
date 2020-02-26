@@ -38,7 +38,7 @@ export const fetchMeals = () => {
     }
 }
 
-export const createFilm = (title, duration, ingredients, steps, score, categoryIds) => {
+export const createMeal = (title, duration, categoryIds, ingredients, steps, score) => {
     return async (dispatch, getState) => {
         const token = getState().authReducer.token;
         const userId = getState().authReducer.userId;
